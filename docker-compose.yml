@@ -17,9 +17,9 @@ services:
       - msanet
     environment:
       JAVA_OPTS: "-Xss256k"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db/postgres
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 123456
+      DATASOURCE_URL: jdbc:postgresql://db/postgres
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: 123456
   db:
     image: bitnami/postgresql
     ports:

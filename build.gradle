@@ -21,4 +21,7 @@ dependencies {
 
     // migrations
     implementation 'org.liquibase:liquibase-core'
+
+    // probes
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
