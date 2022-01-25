@@ -17,19 +17,20 @@ services:
       - msanet
     environment:
       JAVA_OPTS: "-Xss256k"
-      DATASOURCE_URL: jdbc:postgresql://db/postgres
-      DATASOURCE_USERNAME: postgres
-      DATASOURCE_PASSWORD: 123456
+      DATASOURCE_URL: jdbc:postgresql://db/mydb
+      DATASOURCE_USERNAME: myuser
+      DATASOURCE_PASSWORD: mypass
   db:
-    image: bitnami/postgresql
+    container_name: db
+    image: postgres
     ports:
       - "5432:5432"
     networks:
       - msanet
     environment:
-      POSTGRESQL_PASSWORD: 123456
-      POSTGRESQL_USERNAME: postgres
-      POSTGRESQL_DATABASE: postgres
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
 networks:
   msanet:
     driver: bridge
