@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: otus-service-db-init
+    name: news-db-init
   main:
     banner-mode: off
   datasource:

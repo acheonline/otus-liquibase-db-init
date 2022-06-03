@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  otus-service-db-init:
-    container_name: otus-service-db-init
+  news-db-init:
+    container_name: news-db-init
     restart: on-failure
     build:
       context: .
@@ -10,27 +10,36 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - postgres
     links:
-      - db
+      - postgres
     networks:
       - msanet
     environment:
       JAVA_OPTS: "-Xss256k"
-      DATASOURCE_URL: jdbc:postgresql://db/mydb
-      DATASOURCE_USERNAME: myuser
-      DATASOURCE_PASSWORD: mypass
-  db:
-    container_name: db
-    image: postgres
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/news_db
+  postgres:
+    container_name: postgres
+    image: "bitnami/postgresql"
+    restart: unless-stopped
     ports:
       - "5432:5432"
     networks:
       - msanet
     environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypass
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "news_db"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d news_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
 networks:
   msanet:
     driver: bridge

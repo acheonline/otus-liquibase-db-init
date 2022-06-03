@@ -1,11 +1,9 @@
-DROP TABLE IF EXISTS users;
-CREATE TABLE users
+DROP TABLE IF EXISTS users.users;
+CREATE SCHEMA IF NOT EXISTS users;
+CREATE TABLE IF NOT EXISTS users.users
 (
-    id        serial  NOT NULL,
-    firstname varchar NOT NULL,
-    lastname  varchar NOT NULL,
-    email     varchar NOT NULL,
-    phone     varchar NOT NULL,
-    CONSTRAINT uq_user_firstname UNIQUE (firstname),
-    CONSTRAINT uq_user_lastname UNIQUE (lastname)
+    id       uuid PRIMARY KEY not null,
+    username text UNIQUE NOT NULL,
+    password text UNIQUE NOT NULL,
+    email    text UNIQUE NOT NULL
 );
